@@ -1,0 +1,39 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 10.10.2025 13:13:11
+// Design Name: 
+// Module Name: checkS
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module checkS(a,b );
+    
+    input[63:0] a;
+output [7:0]b;
+assign b=doCheckSum(a);
+
+	function[7:0] doCheckSum;
+	input [63:0] DataArray;
+	
+	reg[15:0] temp1,temp2;
+		begin
+			temp1= DataArray[15:0] ^ DataArray[31:16];
+			temp2=DataArray[63:48] ^ DataArray[47:32];
+			doCheckSum = temp1[7:0] + temp2[7:0] ^ temp1[15:8] + temp2[15:8];
+		end
+	endfunction
+endmodule
